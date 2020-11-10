@@ -26,9 +26,12 @@ def main(data: dict) -> None:
     mail_pass = input("confirm your passwd >>> ")
 
     # MAIL CONTENT -----
-    MAIL_BODY = """This is Mail body \
-    This mail send from python API \
-    Daichi Suzuki."""
+    MAIL_BODY = (
+        "This is Mail body\n"
+        "This mail send from python API\n"
+        "\n"
+        "Daichi Suzuki."
+    )
 
     SUBJECT = 'Hello from python'
 
@@ -38,14 +41,20 @@ def main(data: dict) -> None:
     message['To'] = TO_ADDR  # 送り主
 
     
-    print("送信中.....")
+    print("送信準備中.....")
     sender = smtplib.SMTP_SSL('smtp.gmail.com')
     sender.login(mail_id, mail_pass)
-    sender.sendmail(FROM_ADDR, TO_ADDR, message.as_string())
+    confirm = input("  送信して良いですか? [y/n] >>> ")
+    if confirm == 'y':
+        sender.sendmail(FROM_ADDR, TO_ADDR, message.as_string())
+        print("送信しました。")
+    else:
+        print("aborted.")
     sender.quit()
-    print("送信しました。")
+
 
 if __name__ == '__main__':
     print("[Main]")
     data = readJson()
     main(data)
+
