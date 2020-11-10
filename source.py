@@ -2,16 +2,16 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 
-def readJson() -> dict:
+def readJson(file_name: str="config.json") -> dict:
     """ function read config.json file for get data to send Gmail
     Args:
-        None
+        file_name (str): JSON file name to read
     Returns:
         data (dict): data of json
     """
-    j = open("config.json", 'r')
+    f = open(file_name, 'r')
 
-    return json.load(j)
+    return json.load(f)
 
 
 def main(data: dict) -> None:
