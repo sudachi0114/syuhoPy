@@ -18,12 +18,10 @@ def main(data: dict) -> None:
     TO_ADDR = data['to_addr']
     FROM_ADDR = data['from_addr']
 
-    print("SEND Gmail -----")
+    print("SEND Gmail ===============")
     print("  To  :",  TO_ADDR)
     print("  From:",FROM_ADDR)
 
-    mail_id = FROM_ADDR
-    mail_pass = input("confirm your passwd >>> ")
 
     # MAIL CONTENT -----
     MAIL_BODY = (
@@ -35,22 +33,31 @@ def main(data: dict) -> None:
 
     SUBJECT = 'Hello from python'
 
+    print("----------")
+    print("subject:", SUBJECT)
+    print("body:")
+    print(MAIL_BODY)
+    print("----------")
+
     message = MIMEText(MAIL_BODY)  # 本文
     message['Subject'] = SUBJECT  # 件名
     message['From'] = FROM_ADDR  # 宛先
     message['To'] = TO_ADDR  # 送り主
 
     
-    print("送信準備中.....")
-    sender = smtplib.SMTP_SSL('smtp.gmail.com')
-    sender.login(mail_id, mail_pass)
     confirm = input("  送信して良いですか? [y/n] >>> ")
     if confirm == 'y':
+        print("送信準備中.....")
+        mail_pass = input("confirm your passwd >>> ")
+
+        sender = smtplib.SMTP_SSL('smtp.gmail.com')
+        sender.login(FROM_ADDR, mail_pass)
+
         sender.sendmail(FROM_ADDR, TO_ADDR, message.as_string())
         print("送信しました。")
+        sender.quit()
     else:
         print("aborted.")
-    sender.quit()
 
 
 if __name__ == '__main__':
