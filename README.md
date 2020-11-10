@@ -2,14 +2,18 @@
 
 ## Usage;
 
-* please replace Gmail address for your condition.
+* **Only first-time** 
 
-```python:source.py
-import smtplib
-from email.mime.text import MIMEText
+```
+cp config.sample.json config.json
+```
 
-def main():
-	""" PLEASE CHANGE HERE """
-    TO_ADDR = 'to@gmail.com'
-    FROM_ADDR = 'from@gmail.com'
+* **To Change Email address configuration** please replace Here ⬇️.
+
+```json:config.json
+{
+	// please change 2 email address below, for your condition
+	"to_addr": "to@gmail.com",
+	"from_addr": "from@gmail.com"
+}
 ```
