@@ -24,12 +24,15 @@ def main(data: dict) -> None:
 
 
     # MAIL CONTENT -----
+    MAIL_BODY = data['mail_body']
+    """
     MAIL_BODY = (
         "This is Mail body\n"
         "This mail send from python API\n"
         "\n"
         "Daichi Suzuki."
     )
+    """
 
     SUBJECT = 'Hello from python'
 
