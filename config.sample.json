@@ -1,5 +1,6 @@
 {
 	"to_addr": "to@gmail.com",
 	"from_addr": "from@gmail.com",
+	"mail_subject": "mail subject",
 	"mail_body": "Please write your message here.\nYour name."
 }

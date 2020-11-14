@@ -18,16 +18,8 @@ def main(data: dict) -> None:
 
     # MAIL CONTENT -----
     MAIL_BODY = data['mail_body']
-    """
-    MAIL_BODY = (
-        "This is Mail body\n"
-        "This mail send from python API\n"
-        "\n"
-        "Daichi Suzuki."
-    )
-    """
 
-    SUBJECT = 'Hello from python'
+    SUBJECT = data['mail_subject']
 
     message = MIMEText(MAIL_BODY)  # 本文
     message['Subject'] = SUBJECT  # 件名
@@ -42,8 +34,6 @@ def main(data: dict) -> None:
     print("body:")
     print(MAIL_BODY)
     print("----------")
-
-
     
     confirm = input("  送信して良いですか? [y/n] >>> ")
     if confirm == 'y':
@@ -51,7 +41,7 @@ def main(data: dict) -> None:
         mail_pass = input("confirm your passwd >>> ")
 
         sender = smtplib.SMTP_SSL('smtp.gmail.com')
-        sender.login(message['To'], mail_pass)
+        sender.login(message['From'], mail_pass)
 
         sender.sendmail(message['From'], message['To'], message.as_string())
         print("送信しました。")
