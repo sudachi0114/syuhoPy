@@ -15,13 +15,6 @@ def readJson(file_name: str="config.json") -> dict:
 
 
 def main(data: dict) -> None:
-    TO_ADDR = data['to_addr']
-    FROM_ADDR = data['from_addr']
-
-    print("SEND Gmail ===============")
-    print("  To  :",  TO_ADDR)
-    print("  From:",FROM_ADDR)
-
 
     # MAIL CONTENT -----
     MAIL_BODY = data['mail_body']
@@ -36,16 +29,20 @@ def main(data: dict) -> None:
 
     SUBJECT = 'Hello from python'
 
+    message = MIMEText(MAIL_BODY)  # 本文
+    message['Subject'] = SUBJECT  # 件名
+    message['From'] = data['from_addr']  # 宛先
+    message['To'] = data['to_addr']  # 送り主
+
+    print("SEND Gmail ===============")
+    print("  To  :",  message['To'])
+    print("  From:", message['From'])
     print("----------")
     print("subject:", SUBJECT)
     print("body:")
     print(MAIL_BODY)
     print("----------")
 
-    message = MIMEText(MAIL_BODY)  # 本文
-    message['Subject'] = SUBJECT  # 件名
-    message['From'] = FROM_ADDR  # 宛先
-    message['To'] = TO_ADDR  # 送り主
 
     
     confirm = input("  送信して良いですか? [y/n] >>> ")
@@ -54,9 +51,9 @@ def main(data: dict) -> None:
         mail_pass = input("confirm your passwd >>> ")
 
         sender = smtplib.SMTP_SSL('smtp.gmail.com')
-        sender.login(FROM_ADDR, mail_pass)
+        sender.login(message['To'], mail_pass)
 
-        sender.sendmail(FROM_ADDR, TO_ADDR, message.as_string())
+        sender.sendmail(message['From'], message['To'], message.as_string())
         print("送信しました。")
         sender.quit()
     else:
