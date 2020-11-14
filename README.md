@@ -2,14 +2,29 @@
 
 ## Usage;
 
-* please replace Gmail address for your condition.
+* **Only first-time** 
 
-```python:source.py
-import smtplib
-from email.mime.text import MIMEText
-
-def main():
-	""" PLEASE CHANGE HERE """
-    TO_ADDR = 'to@gmail.com'
-    FROM_ADDR = 'from@gmail.com'
 ```
+cp config.sample.json config.json
+```
+
+* **To Change Email configuration** please replace Here ⬇️.
+
+```json:config.json
+{
+	"to_addr": "to@gmail.com",
+	"from_addr": "from@gmail.com",
+	"mail_subject": "mail subject",
+	"mail_body": "Please write your message here.\nYour name."
+}
+
+```
+
+* Send Email
+
+```
+python source.py
+```
+
+Please confirm email content.
+And if it were looks good, then please input your Google Account Application Password.
