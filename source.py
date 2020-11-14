@@ -14,7 +14,7 @@ def readJson(file_name: str="config.json") -> dict:
     return json.load(f)
 
 
-def main(data: dict) -> None:
+def generate_message(data: dict) -> MIMEText:
 
     # MAIL CONTENT -----
     MAIL_BODY = data['mail_body']
@@ -34,7 +34,12 @@ def main(data: dict) -> None:
     print("body:")
     print(MAIL_BODY)
     print("----------")
-    
+
+    return message
+
+
+def send(message: MIMEText) -> None:
+
     confirm = input("  送信して良いですか? [y/n] >>> ")
     if confirm == 'y':
         print("送信準備中.....")
@@ -50,8 +55,12 @@ def main(data: dict) -> None:
         print("aborted.")
 
 
-if __name__ == '__main__':
+def main():
     print("[Main]")
     data = readJson()
-    main(data)
+    message = generate_message(data)
+    send(message)
+
+if __name__ == '__main__':
+    main()
 
